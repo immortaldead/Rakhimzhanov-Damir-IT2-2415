@@ -1,0 +1,14 @@
+{% block title %}Наши рестораны{% endblock %}
+
+{% block content %}
+<h1>Pizza from Damir</h1>
+<ul>
+    {% for restaurant in restaurants %}
+    <li>
+        <a href="{% url 'table-list' restaurant.id %}">
+            {{ restaurant.name }} - {{ restaurant.address }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

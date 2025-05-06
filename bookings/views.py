@@ -1,27 +1,31 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Restaurant, Table, Reservation  
-from .forms import ReservationForm
+from django.http import HttpResponse
+from .models import Restaurant, Table, Reservation
 
-class RestaurantListView(ListView):
-    model = Restaurant
-    template_name = 'bookings/restaurant_list.html'
+def home(request):
+    """Главная страница"""
+    return render(request, 'bookings/home.html')
 
-class TableListView(ListView):
-    model = Table
-    template_name = 'bookings/table_list.html'
-    
-    def get_queryset(self):
-        restaurant = get_object_or_404(Restaurant, pk=self.kwargs['restaurant_id'])
-        return Table.objects.filter(restaurant=restaurant, is_active=True)
+def restaurant_list(request):
+    """Список всех ресторанов"""
+    restaurants = Restaurant.objects.all()
+    return render(request, 'bookings/restaurant_list.html', {
+        'restaurants': restaurants
+    })
 
-class ReservationCreateView(LoginRequiredMixin, CreateView):
-    model = Reservation
-    form_class = ReservationForm
-    template_name = 'bookings/reservation_create.html'
-    success_url = '/reservations/'
-    
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+def table_list(request, restaurant_id):
+    """Список столов в конкретном ресторане"""
+    restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+    tables = Table.objects.filter(restaurant=restaurant)
+    return render(request, 'bookings/table_list.html', {
+        'restaurant': restaurant,
+        'tables': tables
+    })
+
+def create_reservation(request):
+    """Создание новой брони"""
+    return HttpResponse("Форма бронирования будет здесь")
+
+def test_view(request):
+    """Тестовая страница"""
+    return HttpResponse("<h1 style='color:green'>Тест успешен!</h1>")

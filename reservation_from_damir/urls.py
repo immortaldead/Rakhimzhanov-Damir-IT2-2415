@@ -4,7 +4,9 @@ from bookings import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('restaurants/', views.RestaurantListView.as_view(), name='restaurant-list'),
-    path('restaurants/<int:restaurant_id>/tables/', views.TableListView.as_view(), name='table-list'),
-    path('reservations/create/', views.ReservationCreateView.as_view(), name='reservation-create'),
+    path('', views.home, name='home'),
+    path('test/', views.test_view, name='test-view'),
+    path('restaurants/', views.restaurant_list, name='restaurant-list'),
+    path('restaurants/<int:restaurant_id>/tables/', views.table_list, name='table-list'),
+    path('reservations/create/', views.create_reservation, name='reservation-create'),
 ]
