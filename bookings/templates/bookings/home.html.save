@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pizza from Damir</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #d9534f;
+        }
+        nav ul {
+            padding: 0;
+            list-style: none;
+        }
+        nav li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #d9534f;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать в Pizza from Damir!</h1>
+    <nav>
+        <ul>
+            <li><a href="/restaurants/">Наши рестораны</a></li>
+            <li><a href="/reservations/create/">Забронировать столик</a></li>
+            <li><a href="/admin/">Админ-панель</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

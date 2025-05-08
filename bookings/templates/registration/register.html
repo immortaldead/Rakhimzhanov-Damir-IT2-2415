@@ -1,0 +1,21 @@
+{% extends "bookings/base.html" %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+    <h2 style="text-align: center;">Регистрация</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div style="margin-bottom: 15px;">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: red;">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" style="width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px;">Зарегистрироваться</button>
+    </form>
+    <p style="margin-top: 15px; text-align: center;">Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a></p>
+</div>
+{% endblock %}

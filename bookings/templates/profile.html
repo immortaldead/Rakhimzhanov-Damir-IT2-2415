@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Мои бронирования</h2>
+<ul>
+    {% for res in reservations %}
+    <li>
+        {{ res.date }} в {{ res.time }} - Стол №{{ res.table.number }}
+        ({{ res.guests }} гостей)
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

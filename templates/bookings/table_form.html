@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% if is_new %}Добавить стол{% else %}Редактировать стол{% endif %} для {{ restaurant.name }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <p>
+        {{ form.number.label_tag }}<br>
+        {{ form.number }}
+        {% if form.number.errors %}
+            <br><span style="color: red;">{{ form.number.errors }}</span>
+        {% endif %}
+    </p>
+
+    <p>
+        {{ form.capacity.label_tag }}<br>
+        {{ form.capacity }}
+        {% if form.capacity.errors %}
+            <br><span style="color: red;">{{ form.capacity.errors }}</span>
+        {% endif %}
+    </p>
+
+    <p>
+        {{ form.shape.label_tag }}<br>
+        {{ form.shape }}
+        {% if form.shape.errors %}
+            <br><span style="color: red;">{{ form.shape.errors }}</span>
+        {% endif %}
+    </p>
+
+    <p>
+        {{ form.is_active.label_tag }}<br>
+        {{ form.is_active }}
+        {% if form.is_active.errors %}
+            <br><span style="color: red;">{{ form.is_active.errors }}</span>
+        {% endif %}
+    </p>
+
+    <button type="submit">Сохранить</button>
+    <a href="{% url 'table_list' restaurant_id=restaurant.id %}"><button type="button">Отмена</button></a>
+</form>
+{% endblock %}

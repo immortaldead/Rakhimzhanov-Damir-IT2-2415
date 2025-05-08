@@ -1,0 +1,20 @@
+<h2>Забронировать столик</h2>
+<form action="/book" method="POST">
+  <label>Имя:</label>
+  <input type="text" name="name" required><br>
+  
+  <label>Телефон:</label>
+  <input type="tel" name="phone" required><br>
+  
+  <label>Ресторан:</label>
+  <select name="restaurant">
+    <option>Burger Palace</option>
+    <option>Hinkali from Damir</option>
+    <option>Pizza from Damir</option>
+  </select><br>
+  
+  <label>Дата и время:</label>
+  <input type="datetime-local" name="datetime" required><br>
+  
+  <button type="submit">Забронировать</button>
+</form>

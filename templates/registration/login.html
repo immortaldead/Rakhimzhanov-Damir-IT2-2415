@@ -1,0 +1,23 @@
+{% extends "bookings/base.html" %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+    <h2 style="text-align: center;">Вход в систему</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div style="margin-bottom: 15px;">
+            <label for="username" style="display: block; margin-bottom: 5px;">Имя пользователя:</label>
+            <input type="text" name="username" id="username" style="width: 100%; padding: 8px;" required>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label for="password" style="display: block; margin-bottom: 5px;">Пароль:</label>
+            <input type="password" name="password" id="password" style="width: 100%; padding: 8px;" required>
+        </div>
+        <button type="submit" style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px;">Войти</button>
+    </form>
+    {% if error %}
+        <div style="color: red; margin-top: 15px;">{{ error }}</div>
+    {% endif %}
+    <p style="margin-top: 15px; text-align: center;">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a></p>
+</div>
+{% endblock %}
