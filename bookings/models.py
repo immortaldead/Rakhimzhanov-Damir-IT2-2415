@@ -6,6 +6,12 @@ from datetime import timedelta
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from django.apps import apps
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    is_customer = models.BooleanField(default=True)
+    is_manager = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
 
 
 class Restaurant(models.Model):

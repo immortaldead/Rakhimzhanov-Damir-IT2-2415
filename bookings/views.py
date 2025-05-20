@@ -1,24 +1,52 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.http import HttpResponse
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from .models import Restaurant, Table, Reservation
 from .forms import ReservationForm, RestaurantForm, TableForm
 from django.urls import path
 from . import views
 
 
+
+User = get_user_model()  
+
+class CustomRegisterForm(forms.ModelForm):
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return password2
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
+
+
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             messages.success(request, 'Регистрация прошла успешно!')
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = CustomRegisterForm()
 
     return render(request, 'registration/register.html', {'form': form})
 
@@ -44,6 +72,8 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Вы успешно вышли из системы.')
     return redirect('login')
+
+
 
 
 def test_view(request):
