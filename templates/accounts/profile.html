@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+  <h1>Мой профиль</h1>
+  <h3>Мои бронирования</h3>
+
+  {% if reservations %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Стол</th>
+          <th>Дата</th>
+          <th>Время</th>
+          <th>Гости</th>
+          <th>Статус</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reservation in reservations %}
+          <tr>
+            <td>{{ reservation.table.number }}</td>
+            <td>{{ reservation.date }}</td>
+            <td>{{ reservation.time }}</td>
+            <td>{{ reservation.guests }}</td>
+            <td>{{ reservation.get_status_display }}</td>
+            <td>
+              {% if reservation.status != 'canceled' %}
+                <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-danger">Отменить</a>
+              {% else %}
+                <span class="text-muted">Отменено</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>У вас нет активных бронирований.</p>
+  {% endif %}
+{% endblock %}

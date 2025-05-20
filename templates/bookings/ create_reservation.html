@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Забронировать стол №{{ table.number }} в ресторане {{ table.restaurant.name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="guests">Количество гостей:</label>
+    <input type="number" id="guests" name="guests" required min="1" value="1">
+    
+    <label for="date">Дата:</label>
+    <input type="date" id="date" name="date" required>
+    
+    <label for="time">Время:</label>
+    <input type="time" id="time" name="time" required>
+    
+    <button type="submit">Забронировать</button>
+</form>
+
+{% endblock %}

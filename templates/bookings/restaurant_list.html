@@ -3,17 +3,28 @@
 {% block title %}Список ресторанов{% endblock %}
 
 {% block content %}
-<h1>Наши рестораны</h1>
-<ul>
-    {% for restaurant in restaurants %}
-    <li>
-        <a href="{% url 'restaurant-detail' restaurant.id %}">
-            {{ restaurant.name }} - {{ restaurant.address }}
+<div class="container py-5">
+    <h1 class="mb-4 text-center">Наши рестораны</h1>
+    
+    <div class="row">
+        {% for restaurant in restaurants %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <img src="https://www.rijksmuseum.nl/assets/6c9b72ab-e13e-42d2-96a8-4c1e9c74886e?w=1200&h=630&fx=3470&fy=2313&c=3de26b4a182aa8c31b8e496988f0ff0a61359d33dca3ea79ff862ebf71fa0eba" class="card-img-top" alt="{{ restaurant.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ restaurant.name }}</h5>
+                    <p class="card-text">{{ restaurant.address }}</p>
+                    <a href="{% url 'restaurant-detail' restaurant.id %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'restaurant_create' %}" class="btn btn-success btn-lg">
+            Добавить ресторан
         </a>
-    </li>
-    {% endfor %}
-    <a href="{% url 'restaurant_create' %}">
-        <button>Добавить ресторан</button>
-    </a>
-</ul>
+    </div>
+</div>
 {% endblock %}

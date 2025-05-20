@@ -7,19 +7,21 @@
 
 <h2>Столы:</h2>
 <ul>
-    {% for table in restaurant.table_set.all %}
+    {% for table in tables %}
     <li>
         Стол №{{ table.number }} ({{ table.capacity }} персон)
         <a href="{% url 'reservation-create' %}?table_id={{ table.id }}">Забронировать</a>
     </li>
+    {% empty %}
+        <li>Столы не найдены для этого ресторана.</li>
     {% endfor %}
 </ul>
 <a href="{% url 'table_create' restaurant_id=restaurant.pk %}">
-    <button>Create table</button>
+    <button>Создать стол</button>
     </a>
 
 <a href="{% url 'restaurant_delete' pk=restaurant.pk %}">
-<button>Delete</button>
+<button>Удалить</button>
 </a>
 
 {% endblock %}

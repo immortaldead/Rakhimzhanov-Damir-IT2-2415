@@ -11,4 +11,9 @@ urlpatterns = [
     path('restaurants/<int:restaurant_id>/tables/create/', views.table_create, name='table_create'),
     path('tables/<int:pk>/update/', views.table_update, name='table_update'),
     path('tables/<int:pk>/delete/', views.table_delete, name='table_delete'),
+    path('profile/', views.profile, name='profile'),
+    path('cancel_reservation/<int:reservation_id>/', views.cancel_reservation, name='cancel_reservation'),
+    path('create_reservation/', views.create_reservation, name='create_reservation'),
+    path('accounts/register/', views.register, name='register'),
+    path('create/', views.restaurant_create, name='restaurant_create'),
 ]

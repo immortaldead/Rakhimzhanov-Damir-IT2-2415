@@ -14,4 +14,5 @@ urlpatterns = [
     path('restaurants/<int:pk>/', views.restaurant_detail, name='restaurant-detail'),
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='restaurant-detail'),
     path('restaurants/', include('bookings.urls')),
+    path('edit/<int:pk>/', views.restaurant_update, name='restaurant_update'),
 ]

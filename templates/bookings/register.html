@@ -1,5 +1,4 @@
-cat > bookings/templates/registration/register.html << 'EOF'
-{% extends "bookings/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <div class="auth-form">
@@ -32,4 +31,3 @@ cat > bookings/templates/registration/register.html << 'EOF'
     <p class="mt-3">Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a></p>
 </div>
 {% endblock %}
-EOF

@@ -6,14 +6,7 @@ from datetime import timedelta
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from django.apps import apps
-from .models import Restaurant
 
-class Table(models.Model):
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    number = models.CharField(max_length=10)
-    capacity = models.PositiveIntegerField()
-    shape = models.CharField(max_length=20)
-    is_active = models.BooleanField(default=True)
 
 class Restaurant(models.Model):
     SHAPE_CHOICES = [
@@ -38,6 +31,7 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
+
 class Table(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='tables', verbose_name="Ресторан")
     number = models.CharField(max_length=10, verbose_name="Номер стола")
@@ -56,6 +50,7 @@ class Table(models.Model):
     
     def __str__(self):
         return f"Стол {self.number} ({self.capacity} пер.) - {self.restaurant.name}"
+
 
 class Reservation(models.Model):
     STATUS_CHOICES = [
@@ -101,6 +96,7 @@ class Reservation(models.Model):
     
     def is_active(self):
         return self.status in ['pending', 'confirmed']
+
 
 def init_restaurant_data():
     Restaurant = apps.get_model('bookings', 'Restaurant')
@@ -148,6 +144,7 @@ def init_restaurant_data():
             ) for i in range(3)
         ])
         print(f"Создан ресторан: {restaurant.name} с 3 столами")
+
 
 @receiver(post_migrate)
 def on_migrate(sender, **kwargs):

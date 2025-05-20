@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ is_new|yesno:"Добавить ресторан,Редактировать ресторан" }}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+  </form>
+
+  <a href="{% url 'restaurant_list' %}">Назад к списку ресторанов</a>
+{% endblock %}
