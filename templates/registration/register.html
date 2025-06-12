@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-    <h2 style="text-align: center;">Регистрация</h2>
+    <h2 style="text-align: center;">{% trans "Регистрация" %}</h2>
     <form method="post">
         {% csrf_token %}
         {% for field in form %}
@@ -14,8 +15,12 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <button type="submit" style="width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px;">Зарегистрироваться</button>
+        <button type="submit" style="width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px;">
+            {% trans "Зарегистрироваться" %}
+        </button>
     </form>
-    <p style="margin-top: 15px; text-align: center;">Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a></p>
+    <p style="margin-top: 15px; text-align: center;">
+        {% trans "Уже есть аккаунт?" %} <a href="{% url 'login' %}">{% trans "Войдите" %}</a>
+    </p>
 </div>
 {% endblock %}

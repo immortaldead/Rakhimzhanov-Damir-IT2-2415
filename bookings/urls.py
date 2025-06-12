@@ -1,5 +1,6 @@
-from django.urls import path
 from . import views
+from django.conf.urls.i18n import i18n_patterns
+from django.urls import path, include
 
 urlpatterns = [
     path('', views.restaurant_list, name='restaurant_list'),
@@ -16,4 +17,6 @@ urlpatterns = [
     path('create_reservation/', views.create_reservation, name='create_reservation'),
     path('accounts/register/', views.register, name='register'),
     path('create/', views.restaurant_create, name='restaurant_create'),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
+

@@ -1,27 +1,31 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% block content %}
 <h1>{{ restaurant.name }}</h1>
-<p>Адрес: {{ restaurant.address }}</p>
-<p>Телефон: {{ restaurant.phone }}</p>
+<p>{% trans "Адрес:" %} {{ restaurant.address }}</p>
+<p>{% trans "Телефон:" %} {{ restaurant.phone }}</p>
 
-<h2>Столы:</h2>
+<h2>{% trans "Столы:" %}</h2>
 <ul>
     {% for table in tables %}
     <li>
-        Стол №{{ table.number }} ({{ table.capacity }} персон)
-        <a href="{% url 'reservation-create' %}?table_id={{ table.id }}">Забронировать</a>
+        {% blocktrans with number=table.number capacity=table.capacity %}
+            Стол №{{ number }} ({{ capacity }} персон)
+        {% endblocktrans %}
+        <a href="{% url 'reservation-create' %}?table_id={{ table.id }}">{% trans "Забронировать" %}</a>
     </li>
     {% empty %}
-        <li>Столы не найдены для этого ресторана.</li>
+        <li>{% trans "Столы не найдены для этого ресторана." %}</li>
     {% endfor %}
 </ul>
+
 <a href="{% url 'table_create' restaurant_id=restaurant.pk %}">
-    <button>Создать стол</button>
-    </a>
+    <button>{% trans "Создать стол" %}</button>
+</a>
 
 <a href="{% url 'restaurant_delete' pk=restaurant.pk %}">
-<button>Удалить</button>
+    <button>{% trans "Удалить" %}</button>
 </a>
 
 {% endblock %}

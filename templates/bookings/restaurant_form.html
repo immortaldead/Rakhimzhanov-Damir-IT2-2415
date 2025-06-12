@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% block content %}
-  <h2>{{ is_new|yesno:"Добавить ресторан,Редактировать ресторан" }}</h2>
+  <h2>
+    {% if is_new %}
+      {% trans "Добавить ресторан" %}
+    {% else %}
+      {% trans "Редактировать ресторан" %}
+    {% endif %}
+  </h2>
 
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <button type="submit" class="btn btn-primary">{% trans "Сохранить" %}</button>
   </form>
 
-  <a href="{% url 'restaurant_list' %}">Назад к списку ресторанов</a>
+  <a href="{% url 'restaurant_list' %}">{% trans "Назад к списку ресторанов" %}</a>
 {% endblock %}

@@ -1,13 +1,18 @@
+{% load i18n %}
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Мои бронирования</h2>
+<h1>{% trans "Welcome" %}</h1>
+
+<h2>{% trans "Мои бронирования" %}</h2>
 <ul>
     {% for res in reservations %}
     <li>
-        {{ res.date }} в {{ res.time }} - Стол №{{ res.table.number }}
-        ({{ res.guests }} гостей)
+        {{ res.date }} в {{ res.time }} – {% trans "Стол" %} №{{ res.table.number }}
+        ({{ res.guests }} {% trans "гостей" %})
     </li>
+    {% empty %}
+    <li>{% trans "У вас пока нет бронирований." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

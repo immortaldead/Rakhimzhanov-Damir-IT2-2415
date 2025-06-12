@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% block content %}
-<h1>{% if is_new %}Добавить стол{% else %}Редактировать стол{% endif %} для {{ restaurant.name }}</h1>
+<h1>
+    {% if is_new %}
+        {% trans "Добавить стол" %}
+    {% else %}
+        {% trans "Редактировать стол" %}
+    {% endif %}
+    {% trans "для" %} {{ restaurant.name }}
+</h1>
 
 <form method="post">
     {% csrf_token %}
@@ -38,7 +46,9 @@
         {% endif %}
     </p>
 
-    <button type="submit">Сохранить</button>
-    <a href="{% url 'table_list' restaurant_id=restaurant.id %}"><button type="button">Отмена</button></a>
+    <button type="submit">{% trans "Сохранить" %}</button>
+    <a href="{% url 'table_list' restaurant_id=restaurant.id %}">
+        <button type="button">{% trans "Отмена" %}</button>
+    </a>
 </form>
 {% endblock %}

@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Список ресторанов{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Список ресторанов" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h1 class="mb-4 text-center">Наши рестораны</h1>
+    <h1 class="mb-4 text-center">{% trans "Наши рестораны" %}</h1>
     
     <div class="row">
         {% for restaurant in restaurants %}
@@ -14,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ restaurant.name }}</h5>
                     <p class="card-text">{{ restaurant.address }}</p>
-                    <a href="{% url 'restaurant-detail' restaurant.id %}" class="btn btn-primary">Подробнее</a>
+                    <a href="{% url 'restaurant-detail' restaurant.id %}" class="btn btn-primary">{% trans "Подробнее" %}</a>
                 </div>
             </div>
         </div>
@@ -23,7 +24,7 @@
 
     <div class="text-center mt-5">
         <a href="{% url 'restaurant_create' %}" class="btn btn-success btn-lg">
-            Добавить ресторан
+            {% trans "Добавить ресторан" %}
         </a>
     </div>
 </div>

@@ -1,20 +1,21 @@
-<h2>Забронировать столик</h2>
+{% load i18n %}
+<h2>{% trans "Забронировать столик" %}</h2>
 <form action="/book" method="POST">
-  <label>Имя:</label>
+  <label>{% trans "Имя:" %}</label>
   <input type="text" name="name" required><br>
   
-  <label>Телефон:</label>
+  <label>{% trans "Телефон:" %}</label>
   <input type="tel" name="phone" required><br>
   
-  <label>Ресторан:</label>
+  <label>{% trans "Ресторан:" %}</label>
   <select name="restaurant">
-    <option>Burger Palace</option>
-    <option>Hinkali from Damir</option>
-    <option>Pizza from Damir</option>
+    <option>{% trans "Burger Palace" %}</option>
+    <option>{% trans "Hinkali from Damir" %}</option>
+    <option>{% trans "Pizza from Damir" %}</option>
   </select><br>
   
-  <label>Дата и время:</label>
+  <label>{% trans "Дата и время:" %}</label>
   <input type="datetime-local" name="datetime" required><br>
   
-  <button type="submit">Забронировать</button>
+  <button type="submit">{% trans "Забронировать" %}</button>
 </form>

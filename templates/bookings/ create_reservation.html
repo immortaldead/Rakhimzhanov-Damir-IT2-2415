@@ -1,20 +1,24 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% block content %}
-<h1>Забронировать стол №{{ table.number }} в ресторане {{ table.restaurant.name }}</h1>
+<h1>
+    {% blocktrans %}Забронировать стол №{{ table.number }} в ресторане {{ table.restaurant.name }}{% endblocktrans %}
+</h1>
 
 <form method="POST">
     {% csrf_token %}
-    <label for="guests">Количество гостей:</label>
+    
+    <label for="guests">{% trans "Количество гостей:" %}</label>
     <input type="number" id="guests" name="guests" required min="1" value="1">
     
-    <label for="date">Дата:</label>
+    <label for="date">{% trans "Дата:" %}</label>
     <input type="date" id="date" name="date" required>
     
-    <label for="time">Время:</label>
+    <label for="time">{% trans "Время:" %}</label>
     <input type="time" id="time" name="time" required>
     
-    <button type="submit">Забронировать</button>
+    <button type="submit">{% trans "Забронировать" %}</button>
 </form>
 
 {% endblock %}

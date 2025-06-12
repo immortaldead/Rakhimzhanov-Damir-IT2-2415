@@ -1,7 +1,8 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pizza from Damir</title>
+    <title>{% trans "Pizza from Damir" %}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,12 +37,12 @@
     </style>
 </head>
 <body>
-    <h1>Добро пожаловать в Pizza from Damir!</h1>
+    <h1>{% trans "Добро пожаловать в Pizza from Damir!" %}</h1>
     <nav>
         <ul>
-            <li><a href="/restaurants/">Наши рестораны</a></li>
-            <li><a href="/reservations/create/">Забронировать столик</a></li>
-            <li><a href="/admin/">Админ-панель</a></li>
+            <li><a href="/restaurants/">{% trans "Наши рестораны" %}</a></li>
+            <li><a href="/reservations/create/">{% trans "Забронировать столик" %}</a></li>
+            <li><a href="/admin/">{% trans "Админ-панель" %}</a></li>
         </ul>
     </nav>
 </body>

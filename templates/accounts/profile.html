@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Профиль{% endblock %}
+{% block title %}{% trans "Профиль" %}{% endblock %}
 
 {% block content %}
-  <h1>Мой профиль</h1>
-  <h3>Мои бронирования</h3>
+  <h1>{% trans "Мой профиль" %}</h1>
+  <h3>{% trans "Мои бронирования" %}</h3>
 
   {% if reservations %}
     <table class="table">
       <thead>
         <tr>
-          <th>Стол</th>
-          <th>Дата</th>
-          <th>Время</th>
-          <th>Гости</th>
-          <th>Статус</th>
-          <th>Действия</th>
+          <th>{% trans "Стол" %}</th>
+          <th>{% trans "Дата" %}</th>
+          <th>{% trans "Время" %}</th>
+          <th>{% trans "Гости" %}</th>
+          <th>{% trans "Статус" %}</th>
+          <th>{% trans "Действия" %}</th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +28,11 @@
             <td>{{ reservation.get_status_display }}</td>
             <td>
               {% if reservation.status != 'canceled' %}
-                <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-danger">Отменить</a>
+                <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-danger">
+                  {% trans "Отменить" %}
+                </a>
               {% else %}
-                <span class="text-muted">Отменено</span>
+                <span class="text-muted">{% trans "Отменено" %}</span>
               {% endif %}
             </td>
           </tr>
@@ -38,6 +40,6 @@
       </tbody>
     </table>
   {% else %}
-    <p>У вас нет активных бронирований.</p>
+    <p>{% trans "У вас нет активных бронирований." %}</p>
   {% endif %}
 {% endblock %}

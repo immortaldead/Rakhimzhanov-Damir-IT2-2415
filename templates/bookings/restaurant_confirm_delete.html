@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% block content %}
-  <h2>Удалить ресторан "{{ restaurant.name }}"?</h2>
+  <h2>{% blocktrans with name=restaurant.name %}Удалить ресторан "{{ name }}"?{% endblocktrans %}</h2>
   <form method="post">
     {% csrf_token %}
-    <button type="submit">Подтвердить удаление</button>
-    <a href="{% url 'restaurant_detail' restaurant.pk %}">Отмена</a>
+    <button type="submit">{% trans "Подтвердить удаление" %}</button>
+    <a href="{% url 'restaurant_detail' restaurant.pk %}">{% trans "Отмена" %}</a>
   </form>
 {% endblock %}

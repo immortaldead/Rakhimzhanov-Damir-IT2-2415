@@ -1,11 +1,22 @@
 from django.contrib import admin
-from .models import Restaurant, Table, Reservation
+from .models import Restaurant, Table, Reservation, CustomUser
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
+from django.contrib.auth import get_user_model
 User = get_user_model()
 
-admin.site.register(User, UserAdmin)
+try:
+    admin.site.unregister(User)
+except admin.sites.NotRegistered:
+    pass
+
+@admin.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'is_staff', 'is_customer', 'is_manager', 'is_admin')
+    fieldsets = UserAdmin.fieldsets + (
+        (_("Роли"), {'fields': ('is_customer', 'is_manager', 'is_admin')}),
+    )
 
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):

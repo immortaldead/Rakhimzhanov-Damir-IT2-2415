@@ -1,13 +1,18 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Столы в {{ restaurant.name }}</title>
+    <title>{% blocktrans with name=restaurant.name %}Столы в {{ name }}{% endblocktrans %}</title>
 </head>
 <body>
-    <h1>Столы в {{ restaurant.name }}</h1>
+    <h1>{% blocktrans with name=restaurant.name %}Столы в {{ name }}{% endblocktrans %}</h1>
     <ul>
     {% for table in tables %}
-        <li>Стол №{{ table.number }} ({{ table.capacity }} чел.)</li>
+        <li>
+            {% blocktrans with number=table.number capacity=table.capacity %}
+                Стол №{{ number }} ({{ capacity }} чел.)
+            {% endblocktrans %}
+        </li>
     {% endfor %}
     </ul>
 </body>

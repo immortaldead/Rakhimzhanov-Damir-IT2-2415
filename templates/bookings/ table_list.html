@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% block content %}
-<h1>Столы в {{ restaurant.name }}</h1>
+<h1>
+    {% blocktrans %}Столы в {{ restaurant.name }}{% endblocktrans %}
+</h1>
 
 <ul class="list-group">
     {% for table in tables %}
     <li class="list-group-item">
-        Стол №{{ table.number }} ({{ table.capacity }} персон)
+        {% blocktrans with number=table.number capacity=table.capacity %}
+            Стол №{{ number }} ({{ capacity }} персон)
+        {% endblocktrans %}
         <a href="{% url 'reservation-create' %}?table_id={{ table.id }}" 
            class="btn btn-primary float-end">
-            Забронировать
+            {% trans "Забронировать" %}
         </a>
     </li>
     {% endfor %}
